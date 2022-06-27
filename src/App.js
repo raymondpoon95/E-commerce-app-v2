@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
+import { CartProvider } from "./contexts/cart.context";
 
 import Home from "./routes/home/Home";
 import Navigation from "./routes/Navigation/Navigation";
@@ -11,15 +12,17 @@ const App = () => {
   return (
     <UserProvider>
       <ProductsProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Navigation />}>
-              <Route index element={<Home />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="auth" element={<Authentication />} />
-            </Route>
-          </Routes>
-        </Router>
+        <CartProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Navigation />}>
+                <Route index element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="auth" element={<Authentication />} />
+              </Route>
+            </Routes>
+          </Router>
+        </CartProvider>
       </ProductsProvider>
     </UserProvider>
   );
